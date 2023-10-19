@@ -1,0 +1,70 @@
+package model;
+
+public class Doador {
+
+	private String logradouro;
+	private String localidade;
+	private String cep;
+	private String email;
+	private String telefone;
+	private String bairro;
+	private String sobrenome;
+	private String cpf;
+	private String nome;
+	
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	public String getLocalidade() {
+		return localidade;
+	}
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getSobrenome() {
+		return sobrenome;
+	}
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+}

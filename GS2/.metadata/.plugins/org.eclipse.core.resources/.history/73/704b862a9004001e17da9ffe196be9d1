@@ -1,0 +1,91 @@
+package model;
+
+public class Doacao {
+
+	private String dataDoacao;
+	private String tipoDoacao;
+	private String valorPagamento;
+	private String valor;
+	private String idDoacao;
+	private String idFinanca;
+	private String tipoFinanca;
+	private String idProduto;
+	private String tipoProduto;
+	private String quantidade;
+	private String doacaoTipo;
+	private String doadorCPF;
+	
+	public String getDataDoacao() {
+		return dataDoacao;
+	}
+	public void setDataDoacao(String dataDoacao) {
+		this.dataDoacao = dataDoacao;
+	}
+	public String getTipoDoacao() {
+		return tipoDoacao;
+	}
+	public void setTipoDoacao(String tipoDoacao) {
+		this.tipoDoacao = tipoDoacao;
+	}
+	public String getValorPagamento() {
+		return valorPagamento;
+	}
+	public void setValorPagamento(String valorPagamento) {
+		this.valorPagamento = valorPagamento;
+	}
+	public String getValor() {
+		return valor;
+	}
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	public String getIdDoacao() {
+		return idDoacao;
+	}
+	public void setIdDoacao(String idDoacao) {
+		this.idDoacao = idDoacao;
+	}
+	public String getIdFinanca() {
+		return idFinanca;
+	}
+	public void setIdFinanca(String idFinanca) {
+		this.idFinanca = idFinanca;
+	}
+	public String getTipoFinanca() {
+		return tipoFinanca;
+	}
+	public void setTipoFinanca(String tipoFinanca) {
+		this.tipoFinanca = tipoFinanca;
+	}
+	public String getIdProduto() {
+		return idProduto;
+	}
+	public void setIdProduto(String idProduto) {
+		this.idProduto = idProduto;
+	}
+	public String getTipoProduto() {
+		return tipoProduto;
+	}
+	public void setTipoProduto(String tipoProduto) {
+		this.tipoProduto = tipoProduto;
+	}
+	public String getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(String quantidade) {
+		this.quantidade = quantidade;
+	}
+	public String getDoacaoTipo() {
+		return doacaoTipo;
+	}
+	public void setDoacaoTipo(String doacaoTipo) {
+		this.doacaoTipo = doacaoTipo;
+	}
+	public String getDoadorCPF() {
+		return doadorCPF;
+	}
+	public void setDoadorCPF(String doadorCPF) {
+		this.doadorCPF = doadorCPF;
+	}
+	
+}

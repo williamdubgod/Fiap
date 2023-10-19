@@ -1,0 +1,49 @@
+package model;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class BeneficiarioRecebe {
+
+	@NotBlank
+    private String idDoacao;
+    @NotBlank
+    private String idFinanca;
+    @NotBlank
+    private String idProduto;
+    @NotBlank
+    private String idMatricula;
+	
+	public BeneficiarioRecebe(@NotBlank String idDoacao, @NotBlank String idFinanca, @NotBlank String idProduto,
+			@NotBlank String idMatricula) {
+		super();
+		this.idDoacao = idDoacao;
+		this.idFinanca = idFinanca;
+		this.idProduto = idProduto;
+		this.idMatricula = idMatricula;
+	}
+	public String getIdDoacao() {
+		return idDoacao;
+	}
+	public void setIdDoacao(String idDoacao) {
+		this.idDoacao = idDoacao;
+	}
+	public String getIdFinanca() {
+		return idFinanca;
+	}
+	public void setIdFinanca(String idFinanca) {
+		this.idFinanca = idFinanca;
+	}
+	public String getIdProduto() {
+		return idProduto;
+	}
+	public void setIdProduto(String idProduto) {
+		this.idProduto = idProduto;
+	}
+	public String getIdMatricula() {
+		return idMatricula;
+	}
+	public void setIdMatricula(String idMatricula) {
+		this.idMatricula = idMatricula;
+	}
+	
+}

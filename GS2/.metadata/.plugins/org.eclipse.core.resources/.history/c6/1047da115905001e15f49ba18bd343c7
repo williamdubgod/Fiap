@@ -1,0 +1,121 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import connection.ConnectionFactory;
+import model.BeneficiarioRecebe;
+
+public class BeneficiarioRecebeDao {
+
+    public static BeneficiarioRecebe insert(BeneficiarioRecebe beneficiarioRecebe) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "INSERT INTO RECEBE (FK_DOACAO_ID_DOACAO, FK_DOACAO_ID_FINANCA, FK_DOACAO_ID_PRODUTO, FK_BENEFICIARIO_ID_MATRICULA) "
+                         + "VALUES ('" + beneficiarioRecebe.getIdDoacao() + "', '" + beneficiarioRecebe.getIdFinanca() + "', '"
+                         + beneficiarioRecebe.getIdProduto() + "', '" + beneficiarioRecebe.getIdMatricula() + "')";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            
+            return beneficiarioRecebe;
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir o beneficiário que recebe! - " + e);
+            e.printStackTrace();
+            
+            return beneficiarioRecebe;
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public static List<BeneficiarioRecebe> getAll() throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+        ResultSet rs = null;
+        List<BeneficiarioRecebe> list = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM RECEBE";
+
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                BeneficiarioRecebe beneficiarioRecebe = new BeneficiarioRecebe();
+                beneficiarioRecebe.setIdDoacao(rs.getString("FK_DOACAO_ID_DOACAO"));
+                beneficiarioRecebe.setIdFinanca(rs.getString("FK_DOACAO_ID_FINANCA"));
+                beneficiarioRecebe.setIdProduto(rs.getString("FK_DOACAO_ID_PRODUTO"));
+                beneficiarioRecebe.setIdMatricula(rs.getString("FK_BENEFICIARIO_ID_MATRICULA"));
+
+                list.add(beneficiarioRecebe);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar os beneficiários que recebem! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+
+        return list;
+    }
+
+    public static boolean delete(String idMatricula) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "DELETE FROM RECEBE WHERE FK_BENEFICIARIO_ID_MATRICULA = '" + idMatricula + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir o beneficiário que recebe! - " + e);
+            return false;
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public static void update(BeneficiarioRecebe beneficiarioRecebe) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "UPDATE RECEBE SET FK_DOACAO_ID_DOACAO = '" + beneficiarioRecebe.getIdDoacao()
+                         + "', FK_DOACAO_ID_FINANCA = '" + beneficiarioRecebe.getIdFinanca() + "', FK_DOACAO_ID_PRODUTO = '"
+                         + beneficiarioRecebe.getIdProduto() + "', FK_BENEFICIARIO_ID_MATRICULA = '"
+                         + beneficiarioRecebe.getIdMatricula() + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar o beneficiário que recebe! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+}

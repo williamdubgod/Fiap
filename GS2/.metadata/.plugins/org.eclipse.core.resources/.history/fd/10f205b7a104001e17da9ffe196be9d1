@@ -1,0 +1,115 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import connection.ConnectionFactory;
+import model.Realiza;
+
+public class RealizaDao {
+
+    public void insert(Realiza realiza) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "INSERT INTO REALIZA (ID_CONTA_BANCARIA, ID_DOACAO, ID_FINANCA, ID_PRODUTO) "
+                         + "VALUES ('" + realiza.getIdContaBancaria() + "', '" + realiza.getIdDoacao() + "', '"
+                         + realiza.getIdFinanca() + "', '" + realiza.getIdProduto() + "')";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir a realização! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public List<Realiza> getAll() throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+        ResultSet rs = null;
+        List<Realiza> list = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM REALIZA";
+
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                Realiza realiza = new Realiza();
+                realiza.setIdContaBancaria(rs.getString("ID_CONTA_BANCARIA"));
+                realiza.setIdDoacao(rs.getString("ID_DOACAO"));
+                realiza.setIdFinanca(rs.getString("ID_FINANCA"));
+                realiza.setIdProduto(rs.getString("ID_PRODUTO"));
+
+                list.add(realiza);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar as realizações! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+
+        return list;
+    }
+
+    public void delete(String idContaBancaria, String idDoacao, String idFinanca, String idProduto) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "DELETE FROM REALIZA WHERE ID_CONTA_BANCARIA = '" + idContaBancaria + "' AND ID_DOACAO = '"
+                         + idDoacao + "' AND ID_FINANCA = '" + idFinanca + "' AND ID_PRODUTO = '" + idProduto + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir a realização! - " + e);
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public void update(Realiza realiza) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "UPDATE REALIZA SET ID_CONTA_BANCARIA = '" + realiza.getIdContaBancaria() + "', ID_DOACAO = '"
+                         + realiza.getIdDoacao() + "', ID_FINANCA = '" + realiza.getIdFinanca() + "', ID_PRODUTO = '"
+                         + realiza.getIdProduto() + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar a realização! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+}

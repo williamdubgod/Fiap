@@ -1,0 +1,117 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import connection.ConnectionFactory;
+import model.Realiza;
+
+public class RealizaDao {
+
+    public static void insert(Realiza realiza) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "INSERT INTO REALIZA (FK_CONTA_BANCARIA_ID_CONTA_BANCARIA, FK_DOACAO_ID_DOACAO, FK_DOACAO_ID_FINANCA, FK_DOACAO_ID_PRODUTO) "
+                         + "VALUES ('" + realiza.getIdContaBancaria() + "', '" + realiza.getIdDoacao() + "', '"
+                         + realiza.getIdFinanca() + "', '" + realiza.getIdProduto() + "')";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir a realização! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public static List<Realiza> getAll() throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+        ResultSet rs = null;
+        List<Realiza> list = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM REALIZA";
+
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                Realiza realiza = new Realiza();
+                realiza.setIdContaBancaria(rs.getString("FK_CONTA_BANCARIA_ID_CONTA_BANCARIA"));
+                realiza.setIdDoacao(rs.getString("FK_DOACAO_ID_DOACAO"));
+                realiza.setIdFinanca(rs.getString("FK_DOACAO_ID_FINANCA"));
+                realiza.setIdProduto(rs.getString("FK_DOACAO_ID_PRODUTO"));
+
+                list.add(realiza);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar as realizações! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+
+        return list;
+    }
+
+    public void delete(String idContaBancaria, String idDoacao, String idFinanca, String idProduto) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "DELETE FROM REALIZA WHERE FK_CONTA_BANCARIA_ID_CONTA_BANCARIA = '" + idContaBancaria + "' AND FK_DOACAO_ID_DOACAO = '"
+                         + idDoacao + "' AND FK_DOACAO_ID_FINANCA = '" + idFinanca + "' AND FK_DOACAO_ID_PRODUTO = '" + idProduto + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir a realização! - " + e);
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public void update(Realiza realiza) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "UPDATE REALIZA SET FK_CONTA_BANCARIA_ID_CONTA_BANCARIA = '" + realiza.getIdContaBancaria() + "', FK_DOACAO_ID_DOACAO = '"
+                         + realiza.getIdDoacao() + "', FK_DOACAO_ID_FINANCA = '" + realiza.getIdFinanca() + "', FK_DOACAO_ID_PRODUTO = '"
+                         + realiza.getIdProduto() + "' WHERE FK_CONTA_BANCARIA_ID_CONTA_BANCARIA = '" + realiza.getIdContaBancaria()
+                         + "' AND FK_DOACAO_ID_DOACAO = '" + realiza.getIdDoacao() + "' AND FK_DOACAO_ID_FINANCA = '"
+                         + realiza.getIdFinanca() + "' AND FK_DOACAO_ID_PRODUTO = '" + realiza.getIdProduto() + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar a realização! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+}

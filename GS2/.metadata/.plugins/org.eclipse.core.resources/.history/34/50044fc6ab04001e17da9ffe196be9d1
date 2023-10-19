@@ -1,0 +1,79 @@
+package model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class ContaBancaria {
+
+    @NotBlank
+    @JsonProperty("nomeBanco")
+    private String nomeBanco;
+    @NotBlank
+    @JsonProperty("agencia")
+    private String agencia;
+    @NotBlank
+    @JsonProperty("conta")
+    private String conta;
+    @NotBlank
+    @JsonProperty("tipoConta")
+    private String tipoConta;
+	
+    public ContaBancaria() {
+    	
+    }
+	
+    public ContaBancaria(@NotBlank @JsonProperty("nomeBanco") String nomeBanco, @NotBlank @JsonProperty("agencia") String agencia,
+                         @NotBlank @JsonProperty("conta") String conta, @NotBlank @JsonProperty("tipoConta") String tipoConta) {
+        super();
+        this.nomeBanco = nomeBanco;
+        this.agencia = agencia;
+        this.conta = conta;
+        this.tipoConta = tipoConta;
+    }
+	
+    public String getNomeBanco() {
+        return nomeBanco;
+    }
+    public void setNomeBanco(String nomeBanco) {
+        this.nomeBanco = nomeBanco;
+    }
+    public String getAgencia() {
+        return agencia;
+    }
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
+    public String getConta() {
+        return conta;
+    }
+    public void setConta(String conta) {
+        this.conta = conta;
+    }
+    public String getTipoConta() {
+        return tipoConta;
+    }
+    public void setTipoConta(String tipoConta) {
+        this.tipoConta = tipoConta;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nomeBanco, agencia, conta, tipoConta);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ContaBancaria other = (ContaBancaria) obj;
+        return Objects.equals(nomeBanco, other.nomeBanco) && Objects.equals(agencia, other.agencia)
+                && Objects.equals(conta, other.conta) && Objects.equals(tipoConta, other.tipoConta);
+    }
+	
+}

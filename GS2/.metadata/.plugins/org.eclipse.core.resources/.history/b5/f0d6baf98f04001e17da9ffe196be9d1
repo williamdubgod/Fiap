@@ -1,0 +1,35 @@
+package model;
+
+public class BeneficiarioRecebe {
+
+	private String idDoacao;
+	private String idFinanca;
+	private String idProduto;
+	private String idMatricula;
+	
+	public String getIdDoacao() {
+		return idDoacao;
+	}
+	public void setIdDoacao(String idDoacao) {
+		this.idDoacao = idDoacao;
+	}
+	public String getIdFinanca() {
+		return idFinanca;
+	}
+	public void setIdFinanca(String idFinanca) {
+		this.idFinanca = idFinanca;
+	}
+	public String getIdProduto() {
+		return idProduto;
+	}
+	public void setIdProduto(String idProduto) {
+		this.idProduto = idProduto;
+	}
+	public String getIdMatricula() {
+		return idMatricula;
+	}
+	public void setIdMatricula(String idMatricula) {
+		this.idMatricula = idMatricula;
+	}
+	
+}

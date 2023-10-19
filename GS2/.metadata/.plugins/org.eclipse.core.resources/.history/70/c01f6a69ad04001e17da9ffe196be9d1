@@ -1,0 +1,135 @@
+package model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class Beneficiario {
+
+    @NotBlank
+    @JsonProperty("logradouro")
+    private String logradouro;
+    @NotBlank
+    @JsonProperty("localidade")
+    private String localidade;
+    @NotBlank
+    @JsonProperty("cep")
+    private String cep;
+    @NotBlank
+    @JsonProperty("email")
+    private String email;
+    @NotBlank
+    @JsonProperty("telefone")
+    private String telefone;
+    @NotBlank
+    @JsonProperty("bairro")
+    private String bairro;
+    @NotBlank
+    @JsonProperty("sobrenome")
+    private String sobrenome;
+    @NotBlank
+    @JsonProperty("cpf")
+    private String cpf;
+    @NotBlank
+    @JsonProperty("nome")
+    private String nome;
+	
+    public Beneficiario() {
+    	
+    }
+	
+    public Beneficiario(@NotBlank @JsonProperty("logradouro") String logradouro, @NotBlank @JsonProperty("localidade") String localidade,
+                        @NotBlank @JsonProperty("cep") String cep, @NotBlank @JsonProperty("email") String email,
+                        @NotBlank @JsonProperty("telefone") String telefone, @NotBlank @JsonProperty("bairro") String bairro,
+                        @NotBlank @JsonProperty("sobrenome") String sobrenome, @NotBlank @JsonProperty("cpf") String cpf,
+                        @NotBlank @JsonProperty("nome") String nome) {
+        super();
+        this.logradouro = logradouro;
+        this.localidade = localidade;
+        this.cep = cep;
+        this.email = email;
+        this.telefone = telefone;
+        this.bairro = bairro;
+        this.sobrenome = sobrenome;
+        this.cpf = cpf;
+        this.nome = nome;
+    }
+	
+    public String getLogradouro() {
+        return logradouro;
+    }
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+    public String getLocalidade() {
+        return localidade;
+    }
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+    public String getCep() {
+        return cep;
+    }
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getTelefone() {
+        return telefone;
+    }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    public String getBairro() {
+        return bairro;
+    }
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+    public String getSobrenome() {
+        return sobrenome;
+    }
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(logradouro, localidade, cep, email, telefone, bairro, sobrenome, cpf, nome);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Beneficiario other = (Beneficiario) obj;
+        return Objects.equals(logradouro, other.logradouro) && Objects.equals(localidade, other.localidade)
+                && Objects.equals(cep, other.cep) && Objects.equals(email, other.email)
+                && Objects.equals(telefone, other.telefone) && Objects.equals(bairro, other.bairro)
+                && Objects.equals(sobrenome, other.sobrenome) && Objects.equals(cpf, other.cpf)
+                && Objects.equals(nome, other.nome);
+    }
+	
+}

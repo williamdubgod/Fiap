@@ -1,0 +1,81 @@
+package controller;
+
+import java.net.URI;
+import java.sql.SQLException;
+import java.util.List;
+
+import dao.BeneficiarioDao;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.ResponseBuilder;
+import jakarta.ws.rs.core.UriBuilder;
+import model.Beneficiario;
+
+@Path("Beneficiario")
+public class BeneficiarioResources {
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findAll() {
+		try {
+			
+			List<Beneficiario> retorno = BeneficiarioDao.getAll();
+			
+			ResponseBuilder response = Response.ok();
+			
+			response.entity(retorno);
+			return response.build();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response insert(Beneficiario beneficiario) {
+		
+		Beneficiario resp = null;
+		try {
+			resp = BeneficiarioDao.insert(beneficiario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		final URI beneficiarioURI = UriBuilder.fromResource(BeneficiarioResources.class).path("Beneficiario/{id}").build(resp.getIdMatricula());
+		
+		ResponseBuilder response = Response.created(beneficiarioURI);
+		
+		response.entity(resp);
+		return response.build();
+		
+	}
+	
+//	@DELETE
+//	@Path("{/id}")
+//	public Response delete(@PathParam("id") String id) {
+//		
+//		try {
+//			if(BeneficiarioDao.delete(id)) {
+//				ResponseBuilder response = Response.noContent();
+//				return response.build();
+//			}else {
+//				ResponseBuilder response = Response.notModified();
+//				return response.build();
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//		
+//	}
+	
+}

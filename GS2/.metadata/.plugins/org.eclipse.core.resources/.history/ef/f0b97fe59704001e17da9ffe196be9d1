@@ -1,0 +1,136 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import connection.ConnectionFactory;
+import model.Beneficiario;
+
+public class BeneficiarioDao {
+
+    public void insert(Beneficiario beneficiario) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+       
+        try {
+            String query = "INSERT INTO Beneficiario (telefone, nome, cep, logradouro, localidade, renda, email, idMatricula) "
+                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+           
+            statement = conn.prepareStatement(query);
+            statement.setString(1, beneficiario.getTelefone());
+            statement.setString(2, beneficiario.getNome());
+            statement.setString(3, beneficiario.getCep());
+            statement.setString(4, beneficiario.getLogradouro());
+            statement.setString(5, beneficiario.getLocalidade());
+            statement.setDouble(6, beneficiario.getRenda());
+            statement.setString(7, beneficiario.getEmail());
+            statement.setString(8, beneficiario.getIdMatricula());
+           
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir o beneficiário! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+    
+    public List<Beneficiario> getAll() throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        List<Beneficiario> list = new ArrayList<>();
+       
+        try {
+            String query = "SELECT * FROM Beneficiario";
+            
+            statement = conn.prepareStatement(query);
+           
+            rs = statement.executeQuery();
+           
+            while (rs.next()) {
+                Beneficiario beneficiario = new Beneficiario();
+                beneficiario.setTelefone(rs.getString("telefone"));
+                beneficiario.setNome(rs.getString("nome"));
+                beneficiario.setCep(rs.getString("cep"));
+                beneficiario.setLogradouro(rs.getString("logradouro"));
+                beneficiario.setLocalidade(rs.getString("localidade"));
+                beneficiario.setRenda(rs.getDouble("renda"));
+                beneficiario.setEmail(rs.getString("email"));
+                beneficiario.setIdMatricula(rs.getString("idMatricula"));
+                
+                list.add(beneficiario);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar os beneficiários! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+        
+        return list;
+    }
+    
+    public void delete(String idMatricula) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+       
+        try {
+            String query = "DELETE FROM Beneficiario WHERE idMatricula = ?";
+           
+            statement = conn.prepareStatement(query);
+            statement.setString(1, idMatricula);
+           
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir o beneficiário! - " + e);
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+    
+    public void update(Beneficiario beneficiario) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+       
+        try {
+            String query = "UPDATE Beneficiario SET telefone = ?, nome = ?, cep = ?, logradouro = ?, localidade = ?, renda = ?, email = ? WHERE idMatricula = ?";
+           
+            statement = conn.prepareStatement(query);
+            statement.setString(1, beneficiario.getTelefone());
+            statement.setString(2, beneficiario.getNome());
+            statement.setString(3, beneficiario.getCep());
+            statement.setString(4, beneficiario.getLogradouro());
+            statement.setString(5, beneficiario.getLocalidade());
+            statement.setDouble(6, beneficiario.getRenda());
+            statement.setString(7, beneficiario.getEmail());
+            statement.setString(8, beneficiario.getIdMatricula());
+           
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar o beneficiário! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+}

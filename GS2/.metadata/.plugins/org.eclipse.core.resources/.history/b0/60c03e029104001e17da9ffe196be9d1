@@ -1,0 +1,54 @@
+package model;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class Realiza {
+
+	@NotBlank
+    private String idContaBancaria;
+    @NotBlank
+    private String idDoacao;
+    @NotBlank
+    private String idFinanca;
+    @NotBlank
+    private String idProduto;
+    
+    public Realiza() {
+    	
+    }
+	
+	public Realiza(@NotBlank String idContaBancaria, @NotBlank String idDoacao, @NotBlank String idFinanca,
+			@NotBlank String idProduto) {
+		super();
+		this.idContaBancaria = idContaBancaria;
+		this.idDoacao = idDoacao;
+		this.idFinanca = idFinanca;
+		this.idProduto = idProduto;
+	}
+	
+	public String getIdContaBancaria() {
+		return idContaBancaria;
+	}
+	public void setIdContaBancaria(String idContaBancaria) {
+		this.idContaBancaria = idContaBancaria;
+	}
+	public String getIdDoacao() {
+		return idDoacao;
+	}
+	public void setIdDoacao(String idDoacao) {
+		this.idDoacao = idDoacao;
+	}
+	public String getIdFinanca() {
+		return idFinanca;
+	}
+	public void setIdFinanca(String idFinanca) {
+		this.idFinanca = idFinanca;
+	}
+	public String getIdProduto() {
+		return idProduto;
+	}
+	public void setIdProduto(String idProduto) {
+		this.idProduto = idProduto;
+	}
+	
+}

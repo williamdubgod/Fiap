@@ -1,0 +1,21 @@
+package controller;
+
+import java.util.List;
+
+import org.glassfish.grizzly.Result;
+
+import dao.BeneficiarioDao;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import model.Beneficiario;
+
+public class BeneficiarioResources {
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Result findAll() {
+		List<Beneficiario> retorno = BeneficiarioDao.get
+	}
+	
+}

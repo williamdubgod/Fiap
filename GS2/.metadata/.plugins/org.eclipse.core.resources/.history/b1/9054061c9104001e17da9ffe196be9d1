@@ -1,0 +1,63 @@
+package model;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class ContaBancaria {
+
+	@NotBlank
+    private String codVerificacao;
+    @NotBlank
+    private String agencia;
+    @NotBlank
+    private String numCartao;
+    @NotBlank
+    private String conta;
+    @NotBlank
+    private String id;
+	
+    public ContaBancaria() {
+    	
+    }
+    
+	public ContaBancaria(@NotBlank String codVerificacao, @NotBlank String agencia, @NotBlank String numCartao,
+			@NotBlank String conta, @NotBlank String id) {
+		super();
+		this.codVerificacao = codVerificacao;
+		this.agencia = agencia;
+		this.numCartao = numCartao;
+		this.conta = conta;
+		this.id = id;
+	}
+	
+	public String getCodVerificacao() {
+		return codVerificacao;
+	}
+	public void setCodVerificacao(String codVerificacao) {
+		this.codVerificacao = codVerificacao;
+	}
+	public String getAgencia() {
+		return agencia;
+	}
+	public void setAgencia(String agencia) {
+		this.agencia = agencia;
+	}
+	public String getNumCartao() {
+		return numCartao;
+	}
+	public void setNumCartao(String numCartao) {
+		this.numCartao = numCartao;
+	}
+	public String getConta() {
+		return conta;
+	}
+	public void setConta(String conta) {
+		this.conta = conta;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+}

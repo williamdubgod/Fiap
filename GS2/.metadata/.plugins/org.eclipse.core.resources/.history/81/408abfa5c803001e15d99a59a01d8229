@@ -1,0 +1,11 @@
+package model;
+
+public class ContaBancaria {
+
+	private String codVerificacao;
+	private String agencia;
+	private String numCartao;
+	private String conta;
+	private String id;
+	
+}

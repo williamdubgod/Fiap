@@ -1,0 +1,63 @@
+package model;
+
+public class Beneficiario {
+
+	private String telefone;
+	private String nome;
+	private String cep;
+	private String logradouro;
+	private String localidade;
+	private double renda;
+	private String email;
+	private String idMatricula;
+	
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	public String getLocalidade() {
+		return localidade;
+	}
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+	public double getRenda() {
+		return renda;
+	}
+	public void setRenda(double renda) {
+		this.renda = renda;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getIdMatricula() {
+		return idMatricula;
+	}
+	public void setIdMatricula(String idMatricula) {
+		this.idMatricula = idMatricula;
+	}
+	
+}

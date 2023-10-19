@@ -1,0 +1,96 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.Statement;
+
+public class BeneficiarioDao {
+
+	public void insert(Player p) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement;
+       
+        try {
+            String query = String.format("insert into PERSONAGEM (ID_PERSONAGEM,SALDO,NIVEL,NOME) values(%s,%s,%s,'%s')", p.getId(), p.getSaldo(),p.getNivel(), p.getNome());
+           
+            statement = conn.createStatement();          
+            statement.executeUpdate(query);
+        }catch (Exception e){
+            System.out.println("Erro ao inserir o PERSONAGEM! - " + e);
+            e.printStackTrace();
+        }
+        finally {
+        	conn.close();
+        }
+	}
+	
+	public ArrayList<Player> getAll() throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement;
+        ResultSet rs = null;
+        ArrayList<Player> list = null;
+       
+        try {
+            String query= "select * from PERSONAGEM order by ID_PERSONAGEM";
+            
+            statement=conn.createStatement();
+           
+            rs = statement.executeQuery(query);
+           
+            list = new ArrayList<Player>(); 
+            while(rs.next()){
+            	Player p = new Player(0, 0, 0, 0);
+            	p.setId(Integer.parseInt(rs.getString("ID_PERSONAGEM")));
+            	p.setNome(rs.getString("NOME"));
+            	p.setNivel(Integer.parseInt(rs.getString("NIVEL")));
+            	p.setSaldo(Integer.parseInt(rs.getString("SALDO")));
+            	
+                list.add(p);
+            }
+        }catch (Exception e){
+            System.out.println("Erro ao exibir o PERSONAGEM! - " + e);
+            e.printStackTrace();
+        }
+        finally {
+        	conn.close();
+        }
+        
+        return list;
+	}
+	
+	public void delete(int id) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement;
+       
+        try {
+            String query = String.format("delete from PERSONAGEM where ID_PERSONAGEM = %s", id);
+           
+            statement = conn.createStatement();          
+            statement.executeUpdate(query);
+        }catch (Exception e){
+            System.out.println("Erro ao excluir o PERSONAGEM! - " + e);
+        }
+        finally {
+        	conn.close();
+        }
+	}
+	
+	public void update(Player p) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement;
+       
+        try {
+        	String query = String.format("UPDATE PERSONAGEM SET NOME = '%s', NIVEL = '%s', SALDO = '%s' WHERE ID_PERSONAGEM = '%s'",
+                    p.getNome(), p.getNivel(), p.getSaldo(), p.getId());
+           
+            statement = conn.createStatement();          
+            statement.executeUpdate(query);
+        }catch (Exception e){
+            System.out.println("Erro ao atualizar o PERSONAGEM! - " + e);
+            e.printStackTrace();
+        }
+        finally {
+        	conn.close();
+        }
+	}
+	
+}

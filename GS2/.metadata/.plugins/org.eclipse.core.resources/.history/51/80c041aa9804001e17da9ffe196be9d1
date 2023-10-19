@@ -1,0 +1,120 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import connection.ConnectionFactory;
+import model.Beneficiario;
+
+public class BeneficiarioDao {
+
+    public void insert(Beneficiario beneficiario) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "INSERT INTO Beneficiario (telefone, nome, cep, logradouro, localidade, renda, email, idMatricula) "
+                         + "VALUES ('" + beneficiario.getTelefone() + "', '" + beneficiario.getNome() + "', '" + beneficiario.getCep() + "', '"
+                         + beneficiario.getLogradouro() + "', '" + beneficiario.getLocalidade() + "', " + beneficiario.getRenda() + ", '"
+                         + beneficiario.getEmail() + "', '" + beneficiario.getIdMatricula() + "')";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir o beneficiário! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public List<Beneficiario> getAll() throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+        ResultSet rs = null;
+        List<Beneficiario> list = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM Beneficiario";
+
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                Beneficiario beneficiario = new Beneficiario();
+                beneficiario.setTelefone(rs.getString("telefone"));
+                beneficiario.setNome(rs.getString("nome"));
+                beneficiario.setCep(rs.getString("cep"));
+                beneficiario.setLogradouro(rs.getString("logradouro"));
+                beneficiario.setLocalidade(rs.getString("localidade"));
+                beneficiario.setRenda(rs.getDouble("renda"));
+                beneficiario.setEmail(rs.getString("email"));
+                beneficiario.setIdMatricula(rs.getString("idMatricula"));
+
+                list.add(beneficiario);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar os beneficiários! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+
+        return list;
+    }
+
+    public void delete(String idMatricula) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "DELETE FROM Beneficiario WHERE idMatricula = '" + idMatricula + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir o beneficiário! - " + e);
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+
+    public void update(Beneficiario beneficiario) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        Statement statement = null;
+
+        try {
+            String query = "UPDATE Beneficiario SET telefone = '" + beneficiario.getTelefone() + "', nome = '" + beneficiario.getNome()
+                         + "', cep = '" + beneficiario.getCep() + "', logradouro = '" + beneficiario.getLogradouro() + "', localidade = '"
+                         + beneficiario.getLocalidade() + "', renda = " + beneficiario.getRenda() + ", email = '" + beneficiario.getEmail()
+                         + "' WHERE idMatricula = '" + beneficiario.getIdMatricula() + "'";
+
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar o beneficiário! - " + e);
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            conn.close();
+        }
+    }
+}

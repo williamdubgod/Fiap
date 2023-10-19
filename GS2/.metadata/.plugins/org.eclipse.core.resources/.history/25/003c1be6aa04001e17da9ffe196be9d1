@@ -1,0 +1,122 @@
+package model;
+
+import java.util.Objects;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class Doador {
+
+	@NotBlank
+    private String logradouro;
+    @NotBlank
+    private String localidade;
+    @NotBlank
+    private String cep;
+    @NotBlank
+    private String email;
+    @NotBlank
+    private String telefone;
+    @NotBlank
+    private String bairro;
+    @NotBlank
+    private String sobrenome;
+    @NotBlank
+    private String cpf;
+    @NotBlank
+    private String nome;
+	
+    public Doador() {
+    	
+    }
+    
+	public Doador(@NotBlank String logradouro, @NotBlank String localidade, @NotBlank String cep,
+			@NotBlank String email, @NotBlank String telefone, @NotBlank String bairro, @NotBlank String sobrenome,
+			@NotBlank String cpf, @NotBlank String nome) {
+		super();
+		this.logradouro = logradouro;
+		this.localidade = localidade;
+		this.cep = cep;
+		this.email = email;
+		this.telefone = telefone;
+		this.bairro = bairro;
+		this.sobrenome = sobrenome;
+		this.cpf = cpf;
+		this.nome = nome;
+	}
+	
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	public String getLocalidade() {
+		return localidade;
+	}
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getSobrenome() {
+		return sobrenome;
+	}
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bairro, cep, cpf, email, localidade, logradouro, nome, sobrenome, telefone);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Doador other = (Doador) obj;
+		return Objects.equals(bairro, other.bairro) && Objects.equals(cep, other.cep) && Objects.equals(cpf, other.cpf)
+				&& Objects.equals(email, other.email) && Objects.equals(localidade, other.localidade)
+				&& Objects.equals(logradouro, other.logradouro) && Objects.equals(nome, other.nome)
+				&& Objects.equals(sobrenome, other.sobrenome) && Objects.equals(telefone, other.telefone);
+	}
+	
+}
